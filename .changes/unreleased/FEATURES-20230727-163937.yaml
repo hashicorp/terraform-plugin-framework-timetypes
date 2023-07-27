@@ -1,0 +1,6 @@
+kind: FEATURES
+body: 'timetypes: Add new RFC3339 custom type implementation, representing an RFC
+  3339 timestamp string'
+time: 2023-07-27T16:39:37.87602-04:00
+custom:
+  Issue: "2"
