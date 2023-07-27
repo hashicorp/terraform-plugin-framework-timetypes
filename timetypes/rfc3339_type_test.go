@@ -95,7 +95,6 @@ func TestRFC3339TypeValidate(t *testing.T) {
 			t.Parallel()
 
 			diags := timetypes.RFC3339Type{}.Validate(context.Background(), testCase.in, path.Root("test"))
-			println(diags.Errors())
 
 			if diff := cmp.Diff(diags, testCase.expectedDiags); diff != "" {
 				t.Errorf("Unexpected diagnostics (-got, +expected): %s", diff)
