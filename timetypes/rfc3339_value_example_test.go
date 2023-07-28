@@ -5,7 +5,7 @@ package timetypes_test
 
 import (
 	"fmt"
-	time2 "time"
+	"time"
 
 	"github.com/hashicorp/terraform-plugin-framework-timetypes/timetypes"
 )
@@ -29,6 +29,6 @@ func ExampleRFC3339_ValueRFC3339Time() {
 		}
 
 		// Output: 2023-07-25T23:43:16Z
-		fmt.Println(t.Format(time2.RFC3339))
+		fmt.Println(t.Format(time.RFC3339))
 	}
 }
