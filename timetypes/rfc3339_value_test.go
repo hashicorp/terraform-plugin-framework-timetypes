@@ -65,7 +65,7 @@ func TestRFC3339_StringSemanticEquals(t *testing.T) {
 			expectedMatch:      true,
 		},
 		"error - not given RFC3339 value": {
-			currentRFC3339time: timetypes.NewRFC3339ValueMust("0000-00-00T00:00:00-00:00"),
+			currentRFC3339time: timetypes.NewRFC3339ValueMust("2023-07-25T23:43:16Z"),
 			givenRFC3339time:   basetypes.NewStringValue("0000-00-00T00:00:00-00:00"),
 			expectedMatch:      false,
 			expectedDiags: diag.Diagnostics{
