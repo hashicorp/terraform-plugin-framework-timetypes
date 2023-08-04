@@ -25,47 +25,47 @@ func TestRFC3339_StringSemanticEquals(t *testing.T) {
 		expectedDiags      diag.Diagnostics
 	}{
 		"not equal - different dates": {
-			currentRFC3339time: timetypes.NewRFC3339Value("2023-07-25T23:43:16Z"),
-			givenRFC3339time:   timetypes.NewRFC3339Value("2023-07-26T23:43:16Z"),
+			currentRFC3339time: timetypes.NewRFC3339ValueMust("2023-07-25T23:43:16Z"),
+			givenRFC3339time:   timetypes.NewRFC3339ValueMust("2023-07-26T23:43:16Z"),
 			expectedMatch:      false,
 		},
 		"not equal - different times": {
-			currentRFC3339time: timetypes.NewRFC3339Value("2023-07-25T23:43:16Z"),
-			givenRFC3339time:   timetypes.NewRFC3339Value("2023-07-25T23:01:16Z"),
+			currentRFC3339time: timetypes.NewRFC3339ValueMust("2023-07-25T23:43:16Z"),
+			givenRFC3339time:   timetypes.NewRFC3339ValueMust("2023-07-25T23:01:16Z"),
 			expectedMatch:      false,
 		},
 		"not equal - different offset times": {
-			currentRFC3339time: timetypes.NewRFC3339Value("2023-07-25T23:43:16Z"),
-			givenRFC3339time:   timetypes.NewRFC3339Value("2023-07-25T23:43:16+03:00"),
+			currentRFC3339time: timetypes.NewRFC3339ValueMust("2023-07-25T23:43:16Z"),
+			givenRFC3339time:   timetypes.NewRFC3339ValueMust("2023-07-25T23:43:16+03:00"),
 			expectedMatch:      false,
 		},
 		"not equal - UTC time and local time": {
-			currentRFC3339time: timetypes.NewRFC3339Value("2023-07-25T23:43:16Z"),
-			givenRFC3339time:   timetypes.NewRFC3339Value("2023-07-25T20:43:16-03:00"),
+			currentRFC3339time: timetypes.NewRFC3339ValueMust("2023-07-25T23:43:16Z"),
+			givenRFC3339time:   timetypes.NewRFC3339ValueMust("2023-07-25T20:43:16-03:00"),
 			expectedMatch:      false,
 		},
 		"semantically equal - Z suffix and positive zero num offset": {
-			currentRFC3339time: timetypes.NewRFC3339Value("2023-07-25T23:43:16Z"),
-			givenRFC3339time:   timetypes.NewRFC3339Value("2023-07-25T23:43:16+00:00"),
+			currentRFC3339time: timetypes.NewRFC3339ValueMust("2023-07-25T23:43:16Z"),
+			givenRFC3339time:   timetypes.NewRFC3339ValueMust("2023-07-25T23:43:16+00:00"),
 			expectedMatch:      true,
 		},
 		"semantically equal - Z suffix and negative zero num offset": {
-			currentRFC3339time: timetypes.NewRFC3339Value("2023-07-25T23:43:16Z"),
-			givenRFC3339time:   timetypes.NewRFC3339Value("2023-07-25T23:43:16-00:00"),
+			currentRFC3339time: timetypes.NewRFC3339ValueMust("2023-07-25T23:43:16Z"),
+			givenRFC3339time:   timetypes.NewRFC3339ValueMust("2023-07-25T23:43:16-00:00"),
 			expectedMatch:      true,
 		},
 		"semantically equal - negative zero and positive zero num offset": {
-			currentRFC3339time: timetypes.NewRFC3339Value("2023-07-25T23:43:16-00:00"),
-			givenRFC3339time:   timetypes.NewRFC3339Value("2023-07-25T23:43:16+00:00"),
+			currentRFC3339time: timetypes.NewRFC3339ValueMust("2023-07-25T23:43:16-00:00"),
+			givenRFC3339time:   timetypes.NewRFC3339ValueMust("2023-07-25T23:43:16+00:00"),
 			expectedMatch:      true,
 		},
 		"semantically equal - byte for byte match": {
-			currentRFC3339time: timetypes.NewRFC3339Value("2023-07-25T23:43:16Z"),
-			givenRFC3339time:   timetypes.NewRFC3339Value("2023-07-25T23:43:16Z"),
+			currentRFC3339time: timetypes.NewRFC3339ValueMust("2023-07-25T23:43:16Z"),
+			givenRFC3339time:   timetypes.NewRFC3339ValueMust("2023-07-25T23:43:16Z"),
 			expectedMatch:      true,
 		},
 		"error - not given RFC3339 value": {
-			currentRFC3339time: timetypes.NewRFC3339Value("0000-00-00T00:00:00-00:00"),
+			currentRFC3339time: timetypes.NewRFC3339ValueMust("0000-00-00T00:00:00-00:00"),
 			givenRFC3339time:   basetypes.NewStringValue("0000-00-00T00:00:00-00:00"),
 			expectedMatch:      false,
 			expectedDiags: diag.Diagnostics{
@@ -124,15 +124,15 @@ func TestRFC3339_ValueRFC3339Time(t *testing.T) {
 			},
 		},
 		"valid RFC3339 Timestamp - Zulu suffix": {
-			RFC3339:           timetypes.NewRFC3339Value("2023-07-25T23:43:16Z"),
+			RFC3339:           timetypes.NewRFC3339ValueMust("2023-07-25T23:43:16Z"),
 			expectedTimestamp: "2023-07-25T23:43:16Z",
 		},
 		"valid RFC3339 Timestamp - UTC offset ": {
-			RFC3339:           timetypes.NewRFC3339Value("2023-07-25T23:43:16-00:00"),
+			RFC3339:           timetypes.NewRFC3339ValueMust("2023-07-25T23:43:16-00:00"),
 			expectedTimestamp: "2023-07-25T23:43:16-00:00",
 		},
 		"valid RFC3339 Timestamp - EDT offset ": {
-			RFC3339:           timetypes.NewRFC3339Value("2023-07-25T23:43:16-04:00"),
+			RFC3339:           timetypes.NewRFC3339ValueMust("2023-07-25T23:43:16-04:00"),
 			expectedTimestamp: "2023-07-25T23:43:16-04:00",
 		},
 	}

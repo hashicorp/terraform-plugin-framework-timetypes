@@ -116,7 +116,7 @@ func TestRFC3339TypeValueFromTerraform(t *testing.T) {
 	}{
 		"true": {
 			in:          tftypes.NewValue(tftypes.String, "2023-07-25T20:43:16+00:00"),
-			expectation: timetypes.NewRFC3339Value("2023-07-25T20:43:16+00:00"),
+			expectation: timetypes.NewRFC3339ValueMust("2023-07-25T20:43:16+00:00"),
 		},
 		"unknown": {
 			in:          tftypes.NewValue(tftypes.String, tftypes.UnknownValue),

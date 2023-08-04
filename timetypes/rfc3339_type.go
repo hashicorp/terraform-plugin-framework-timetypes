@@ -89,13 +89,7 @@ func (t RFC3339Type) Validate(ctx context.Context, in tftypes.Value, path path.P
 	}
 
 	if _, err := time.Parse(time.RFC3339, valueString); err != nil {
-		diags.AddAttributeError(
-			path,
-			"Invalid RFC3339 String Value",
-			"A string value was provided that is not valid RFC3339 string format.\n\n"+
-				"Given Value: "+valueString+"\n"+
-				"Error: "+err.Error(),
-		)
+		diags.Append(diag.WithPath(path, rfc3339InvalidStringDiagnostic(valueString, err)))
 
 		return diags
 	}

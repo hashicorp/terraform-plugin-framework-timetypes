@@ -113,16 +113,60 @@ func NewRFC3339Unknown() RFC3339 {
 	}
 }
 
-// NewRFC3339Value creates an RFC3339 with a known value. Access the value via ValueString method.
-func NewRFC3339Value(value string) RFC3339 {
+// NewRFC3339Value creates an RFC3339 with a known value or raises an error
+// diagnostic if the string is not RFC3339 format.
+func NewRFC3339Value(value string) (RFC3339, diag.Diagnostics) {
+	_, err := time.Parse(time.RFC3339, value)
+
+	if err != nil {
+		// Returning an unknown value will guarantee that, as a last resort,
+		// Terraform will return an error if attempting to store into state.
+		return NewRFC3339Unknown(), diag.Diagnostics{rfc3339InvalidStringDiagnostic(value, err)}
+	}
+
+	return RFC3339{
+		StringValue: basetypes.NewStringValue(value),
+	}, nil
+}
+
+// NewRFC3339ValueMust creates an RFC3339 with a known value or raises a panic
+// if the string is not RFC3339 format.
+//
+// This creation function is only recommended to create RFC3339 values which
+// either will not potentially affect practitioners, such as testing, or within
+// exhaustively tested provider logic.
+func NewRFC3339ValueMust(value string) RFC3339 {
+	_, err := time.Parse(time.RFC3339, value)
+
+	if err != nil {
+		panic(fmt.Sprintf("Invalid RFC3339 String Value (%s): %s", value, err))
+	}
+
 	return RFC3339{
 		StringValue: basetypes.NewStringValue(value),
 	}
 }
 
-// NewRFC3339PointerValue creates an RFC3339 with a null value if nil or a known value. Access the value via ValueStringPointer method.
-func NewRFC3339PointerValue(value *string) RFC3339 {
-	return RFC3339{
-		StringValue: basetypes.NewStringPointerValue(value),
+// NewRFC3339PointerValue creates an RFC3339 with a null value if nil, a known
+// value, or raises an error diagnostic if the string is not RFC3339 format.
+func NewRFC3339PointerValue(value *string) (RFC3339, diag.Diagnostics) {
+	if value == nil {
+		return NewRFC3339Null(), nil
 	}
+
+	return NewRFC3339Value(*value)
+}
+
+// NewRFC3339PointerValueMust creates an RFC3339 with a null value if nil, a
+// known value, or raises a panic if the string is not RFC3339 format.
+//
+// This creation function is only recommended to create RFC3339 values which
+// either will not potentially affect practitioners, such as testing, or within
+// exhaustively tested provider logic.
+func NewRFC3339PointerValueMust(value *string) RFC3339 {
+	if value == nil {
+		return NewRFC3339Null()
+	}
+
+	return NewRFC3339ValueMust(*value)
 }
