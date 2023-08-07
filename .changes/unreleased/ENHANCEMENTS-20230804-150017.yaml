@@ -1,0 +1,6 @@
+kind: ENHANCEMENTS
+body: 'timetypes: Added `NewRFC3339ValueMust` and `NewRFC3339PointerValueMust` value
+  creation functions, which panic if the string is not RFC3339 formatted'
+time: 2023-08-04T15:00:17.549012-04:00
+custom:
+  Issue: "7"
