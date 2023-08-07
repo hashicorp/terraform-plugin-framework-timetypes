@@ -1,0 +1,6 @@
+kind: ENHANCEMENTS
+body: 'timetypes: Added `NewRFC3339TimeValue()` function, which supports creating
+  a known value from a `time.Time`'
+time: 2023-08-07T14:30:16.606655-04:00
+custom:
+  Issue: "6"
