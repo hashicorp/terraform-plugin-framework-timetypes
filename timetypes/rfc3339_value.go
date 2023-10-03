@@ -120,6 +120,18 @@ func NewRFC3339TimeValue(value time.Time) RFC3339 {
 	}
 }
 
+// NewRFC3339TimePointerValue creates an RFC3339 with a null value if nil or
+// a known value.
+func NewRFC3339TimePointerValue(value *time.Time) RFC3339 {
+	if value == nil {
+		return NewRFC3339Null()
+	}
+
+	return RFC3339 {
+		StringValue: basetypes.NewStringValue(value.Format(time.RFC3339)),
+	}
+}
+
 // NewRFC3339Value creates an RFC3339 with a known value or raises an error
 // diagnostic if the string is not RFC3339 format.
 func NewRFC3339Value(value string) (RFC3339, diag.Diagnostics) {
