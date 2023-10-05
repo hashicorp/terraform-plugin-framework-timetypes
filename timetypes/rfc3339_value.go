@@ -127,7 +127,7 @@ func NewRFC3339TimePointerValue(value *time.Time) RFC3339 {
 		return NewRFC3339Null()
 	}
 
-	return RFC3339 {
+	return RFC3339{
 		StringValue: basetypes.NewStringValue(value.Format(time.RFC3339)),
 	}
 }
