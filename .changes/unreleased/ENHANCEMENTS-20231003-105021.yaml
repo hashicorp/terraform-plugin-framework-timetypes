@@ -1,6 +1,0 @@
-kind: ENHANCEMENTS
-body: 'timetypes: Added `NewRFC3339TimePointerValue()` function, which supports creating
-  a known value from a `*time.Time`'
-time: 2023-10-03T10:50:21.445239172-04:00
-custom:
-  Issue: "20"

@@ -1,3 +1,9 @@
+## 0.3.0 (October 09, 2023)
+
+ENHANCEMENTS:
+
+* timetypes: Added `NewRFC3339TimePointerValue()` function, which supports creating a known value from a `*time.Time` ([#20](https://github.com/hashicorp/terraform-plugin-framework-timetypes/issues/20))
+
 ## 0.2.0 (August 08, 2023)
 
 BREAKING CHANGES:
