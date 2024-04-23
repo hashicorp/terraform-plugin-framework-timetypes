@@ -1,0 +1,6 @@
+kind: ENHANCEMENTS
+body: 'timetypes: Added `ValidateAttribute()` method to `RFC3339` type, which supports
+  validating an attribute value '
+time: 2024-04-23T09:51:48.854267+01:00
+custom:
+  Issue: "58"
