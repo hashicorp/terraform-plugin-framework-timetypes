@@ -1,5 +1,5 @@
 kind: BREAKING CHANGES
-body: 'timetypes: Removed `Validate()` method from `RFC3339Type` type following deprecation`
+body: 'timetypes: Removed `Validate()` method from `RFC3339Type` type following deprecation
   of `xattr.TypeWithValidate`'
 time: 2024-04-23T09:46:41.922203+01:00
 custom:
