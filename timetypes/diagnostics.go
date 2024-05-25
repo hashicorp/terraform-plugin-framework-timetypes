@@ -15,3 +15,14 @@ func rfc3339InvalidStringDiagnostic(value string, err error) diag.Diagnostic {
 			"Error: "+err.Error(),
 	)
 }
+
+// durationInvalidStringDiagnostic returns an error diagnostic intended to report
+// when a string is not a time duration.
+func durationInvalidStringDiagnostic(value string, err error) diag.Diagnostic {
+	return diag.NewErrorDiagnostic(
+		"Invalid time duration String Value",
+		"A string value was provided that is not valid time duration string format.\n\n"+
+			"Given Value: "+value+"\n"+
+			"Error: "+err.Error(),
+	)
+}
