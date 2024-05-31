@@ -10,19 +10,19 @@ import (
 )
 
 type DurationResourceModel struct {
-	Duration timetypes.Duration `tfsdk:"duration"`
+	Duration timetypes.GoDuration `tfsdk:"duration"`
 }
 
-func ExampleDuration_ValueDuration() {
+func ExampleGoDuration_ValueGoDuration() {
 	// For example purposes, typically the data model would be populated automatically by Plugin Framework via Config, Plan or State.
 	// https://developer.hashicorp.com/terraform/plugin/framework/handling-data/accessing-values
 	data := DurationResourceModel{
-		Duration: timetypes.NewDurationValueFromStringMust("1h2m3s"),
+		Duration: timetypes.NewGoDurationValueFromStringMust("1h2m3s"),
 	}
 
 	// Check that the duration data is known and able to be converted to time.Duration
 	if !data.Duration.IsNull() && !data.Duration.IsUnknown() {
-		t, diags := data.Duration.ValueDuration()
+		t, diags := data.Duration.ValueGoDuration()
 		if diags.HasError() {
 			return
 		}

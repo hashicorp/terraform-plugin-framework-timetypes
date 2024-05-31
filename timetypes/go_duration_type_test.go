@@ -21,17 +21,17 @@ func TestDurationTypeValueFromTerraform(t *testing.T) {
 		expectation attr.Value
 		expectedErr string
 	}{
-		"true": {
+		"value": {
 			in:          tftypes.NewValue(tftypes.String, "72h3m0.5s"),
-			expectation: timetypes.NewDurationValueFromStringMust("72h3m0.5s"),
+			expectation: timetypes.NewGoDurationValueFromStringMust("72h3m0.5s"),
 		},
 		"unknown": {
 			in:          tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
-			expectation: timetypes.NewDurationUnknown(),
+			expectation: timetypes.NewGoDurationUnknown(),
 		},
 		"null": {
 			in:          tftypes.NewValue(tftypes.String, nil),
-			expectation: timetypes.NewDurationNull(),
+			expectation: timetypes.NewGoDurationNull(),
 		},
 		"wrongType": {
 			in:          tftypes.NewValue(tftypes.Number, 123),
@@ -44,7 +44,7 @@ func TestDurationTypeValueFromTerraform(t *testing.T) {
 			t.Parallel()
 			ctx := context.Background()
 
-			got, err := timetypes.DurationType{}.ValueFromTerraform(ctx, testCase.in)
+			got, err := timetypes.GoDurationType{}.ValueFromTerraform(ctx, testCase.in)
 			if err != nil {
 				if testCase.expectedErr == "" {
 					t.Fatalf("Unexpected error: %s", err)
