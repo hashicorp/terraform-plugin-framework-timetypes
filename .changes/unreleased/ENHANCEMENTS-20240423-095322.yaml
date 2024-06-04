@@ -1,6 +1,0 @@
-kind: ENHANCEMENTS
-body: 'timetypes: Added `ValidateParameter()` method to `RFC3339` type, which supports
-  validating a provider-defined function parameter value'
-time: 2024-04-23T09:53:22.762454+01:00
-custom:
-  Issue: "58"
