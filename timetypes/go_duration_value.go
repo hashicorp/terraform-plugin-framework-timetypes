@@ -16,9 +16,9 @@ import (
 )
 
 var (
-	_ basetypes.StringValuable       = (*GoDuration)(nil)
-	_ xattr.ValidateableAttribute    = (*GoDuration)(nil)
-	_ function.ValidateableParameter = (*GoDuration)(nil)
+	_ basetypes.StringValuableWithSemanticEquals = (*GoDuration)(nil)
+	_ xattr.ValidateableAttribute                = (*GoDuration)(nil)
+	_ function.ValidateableParameter             = (*GoDuration)(nil)
 )
 
 // GoDuration represents a valid Go time duration string.
@@ -104,6 +104,30 @@ func (d GoDuration) ValueGoDuration() (time.Duration, diag.Diagnostics) {
 	}
 
 	return duration, nil
+}
+
+// StringSemanticEquals returns true if the given GoDuration string value is semantically equal to the current GoDuration string value.
+// It ensures that two duration values are semantically equal even if their string representations are different.
+func (d GoDuration) StringSemanticEquals(ctx context.Context, newValuable basetypes.StringValuable) (bool, diag.Diagnostics) {
+	var diags diag.Diagnostics
+
+	newValue, ok := newValuable.(GoDuration)
+	if !ok {
+		diags.AddError(
+			"Semantic Equality Check Error",
+			"An unexpected value type was received while performing semantic equality checks. "+
+				"Please report this to the provider developers.\n\n"+
+				"Expected Value Type: "+fmt.Sprintf("%T", GoDurationType{})+"\n"+
+				"Got Value Type: "+fmt.Sprintf("%T", newValuable),
+		)
+
+		return false, diags
+	}
+
+	priorDuration, _ := d.ValueGoDuration()
+	newDuration, _ := newValue.ValueGoDuration()
+
+	return priorDuration == newDuration, diags
 }
 
 // NewGoDurationNull creates an Duration with a null value. Determine whether the value is null via IsNull method.
