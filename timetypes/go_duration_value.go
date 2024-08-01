@@ -40,11 +40,7 @@ func (d GoDuration) Equal(o attr.Value) bool {
 		return false
 	}
 
-	// Strings are already validated at this point, ignoring errors
-	thisDuration, _ := time.ParseDuration(d.ValueString())
-	otherDuration, _ := time.ParseDuration(other.ValueString())
-
-	return thisDuration == otherDuration
+	return d.StringValue.Equal(other.StringValue)
 }
 
 // ValidateAttribute implements attribute value validation. This type requires the value to be a String value that

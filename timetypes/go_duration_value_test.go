@@ -39,7 +39,7 @@ func TestDuration_Equals(t *testing.T) {
 		"equal - same duration expressed differently": {
 			currentDuration: timetypes.NewGoDurationValueFromStringMust("3h25m63s"),
 			givenDuration:   timetypes.NewGoDurationValueFromStringMust("12363s"),
-			expectedMatch:   true,
+			expectedMatch:   false,
 		},
 		"error - not a Duration value": {
 			currentDuration: timetypes.NewGoDurationValueFromStringMust("56s"),
