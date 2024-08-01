@@ -117,7 +117,7 @@ func (d GoDuration) StringSemanticEquals(ctx context.Context, newValuable basety
 			"Semantic Equality Check Error",
 			"An unexpected value type was received while performing semantic equality checks. "+
 				"Please report this to the provider developers.\n\n"+
-				"Expected Value Type: "+fmt.Sprintf("%T", GoDurationType{})+"\n"+
+				"Expected Value Type: "+fmt.Sprintf("%T", d)+"\n"+
 				"Got Value Type: "+fmt.Sprintf("%T", newValuable),
 		)
 

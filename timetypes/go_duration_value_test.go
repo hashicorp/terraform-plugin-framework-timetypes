@@ -208,7 +208,7 @@ func TestDuration_StringSemanticEquals(t *testing.T) {
 					"Semantic Equality Check Error",
 					"An unexpected value type was received while performing semantic equality checks. "+
 						"Please report this to the provider developers.\n\n"+
-						"Expected Value Type: timetypes.GoDurationType\n"+
+						"Expected Value Type: timetypes.GoDuration\n"+
 						"Got Value Type: basetypes.StringValue",
 				),
 			},
