@@ -1,0 +1,5 @@
+kind: ENHANCEMENTS
+body: 'timetypes: Implement StringSemanticEquals for GoDuration'
+time: 2024-08-01T15:05:30.200232-05:00
+custom:
+    Issue: "75"
