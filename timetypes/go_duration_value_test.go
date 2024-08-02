@@ -39,7 +39,7 @@ func TestDuration_Equals(t *testing.T) {
 		"equal - same duration expressed differently": {
 			currentDuration: timetypes.NewGoDurationValueFromStringMust("3h25m63s"),
 			givenDuration:   timetypes.NewGoDurationValueFromStringMust("12363s"),
-			expectedMatch:   true,
+			expectedMatch:   false,
 		},
 		"error - not a Duration value": {
 			currentDuration: timetypes.NewGoDurationValueFromStringMust("56s"),
@@ -169,6 +169,64 @@ func TestDurationValidateParameter(t *testing.T) {
 			)
 
 			if diff := cmp.Diff(resp.Error, testCase.expectedFuncErr); diff != "" {
+				t.Errorf("Unexpected diagnostics (-got, +expected): %s", diff)
+			}
+		})
+	}
+}
+
+func TestDuration_StringSemanticEquals(t *testing.T) {
+	t.Parallel()
+
+	testCases := map[string]struct {
+		currentDuration timetypes.GoDuration
+		givenDuration   basetypes.StringValuable
+		expectedMatch   bool
+		expectedDiags   diag.Diagnostics
+	}{
+		"not equal - different durations": {
+			currentDuration: timetypes.NewGoDurationValueFromStringMust("50s"),
+			givenDuration:   timetypes.NewGoDurationValueFromStringMust("50m"),
+			expectedMatch:   false,
+		},
+		"equal - exactly the same string": {
+			currentDuration: timetypes.NewGoDurationValueFromStringMust("30h22m33s"),
+			givenDuration:   timetypes.NewGoDurationValueFromStringMust("30h22m33s"),
+			expectedMatch:   true,
+		},
+		"equal - same duration expressed differently": {
+			currentDuration: timetypes.NewGoDurationValueFromStringMust("3h25m63s"),
+			givenDuration:   timetypes.NewGoDurationValueFromStringMust("12363s"),
+			expectedMatch:   true,
+		},
+		"error - not a Duration value": {
+			currentDuration: timetypes.NewGoDurationValueFromStringMust("56s"),
+			givenDuration:   basetypes.NewStringValue("abcdef"),
+			expectedMatch:   false,
+			expectedDiags: diag.Diagnostics{
+				diag.NewErrorDiagnostic(
+					"Semantic Equality Check Error",
+					"An unexpected value type was received while performing semantic equality checks. "+
+						"Please report this to the provider developers.\n\n"+
+						"Expected Value Type: timetypes.GoDuration\n"+
+						"Got Value Type: basetypes.StringValue",
+				),
+			},
+		},
+	}
+
+	for name, testCase := range testCases {
+		name, testCase := name, testCase
+		t.Run(name, func(t *testing.T) {
+			t.Parallel()
+
+			match, diags := testCase.currentDuration.StringSemanticEquals(context.Background(), testCase.givenDuration)
+
+			if testCase.expectedMatch != match {
+				t.Errorf("Expected StringSemanticEquals to return: %t, but got: %t", testCase.expectedMatch, match)
+			}
+
+			if diff := cmp.Diff(diags, testCase.expectedDiags); diff != "" {
 				t.Errorf("Unexpected diagnostics (-got, +expected): %s", diff)
 			}
 		})
