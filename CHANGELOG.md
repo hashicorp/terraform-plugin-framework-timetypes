@@ -1,3 +1,9 @@
+## 0.5.0 (August 06, 2024)
+
+ENHANCEMENTS:
+
+* timetypes: Implement StringSemanticEquals for GoDuration ([#75](https://github.com/hashicorp/terraform-plugin-framework-timetypes/issues/75))
+
 ## 0.4.0 (June 04, 2024)
 
 BREAKING CHANGES:
