@@ -1,0 +1,5 @@
+kind: FEATURES
+body: Add `godurationvalidators.AtLeast(min time.Duration)` validator
+time: 2024-12-20T20:00:33.120534-05:00
+custom:
+    Issue: "92"
