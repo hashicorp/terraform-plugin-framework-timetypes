@@ -48,7 +48,7 @@ func TestDuration_Equals(t *testing.T) {
 		},
 	}
 	for name, testCase := range testCases {
-		name, testCase := name, testCase
+
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
 
@@ -98,7 +98,7 @@ func TestDurationValidateAttribute(t *testing.T) {
 		},
 	}
 	for name, testCase := range testCases {
-		name, testCase := name, testCase
+
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
 
@@ -154,7 +154,7 @@ func TestDurationValidateParameter(t *testing.T) {
 		},
 	}
 	for name, testCase := range testCases {
-		name, testCase := name, testCase
+
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
 
@@ -216,7 +216,7 @@ func TestDuration_StringSemanticEquals(t *testing.T) {
 	}
 
 	for name, testCase := range testCases {
-		name, testCase := name, testCase
+
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
 
@@ -265,7 +265,7 @@ func TestDuration_ValueDuration(t *testing.T) {
 		},
 	}
 	for name, testCase := range testCases {
-		name, testCase := name, testCase
+
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
 
